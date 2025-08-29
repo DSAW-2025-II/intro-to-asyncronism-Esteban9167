@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/fOa_bXW6)
 # Desarrollo de Aplicaciones Web
 ## Introducción al Asíncronismo
 
@@ -21,6 +22,10 @@
 - [¿Cómo manejar el asíncronismo correctamente?](https://www.youtube.com/watch?v=vn3tm0quoqE&pp=ygUWYXN5bmMgYXdhaXQgamF2YXNjcmlwdA%3D%3D)
 
 
+
+
+
+
 ## Rúbrica
 
 | Criterio           | Puntaje |
@@ -30,3 +35,11 @@
 | Calidad del código     | 1.5     |
 | Funcionalidad      | 1.5      |
 
+## 👤 Autor  
+**Esteban Sequeda Henao**  
+**Código:** 328378  
+**Correo:** [estebansehe@unisabana.edu.co](mailto:estebansehe@unisabana.edu.co)  
+
+## 🌐 Despliegue  
+El proyecto está publicado en **GitHub Pages** en el siguiente enlace:  
+🔗 [https://dsaw-2025-ii.github.io/intro-to-asyncronism-Esteban9167/](https://dsaw-2025-ii.github.io/intro-to-asyncronism-Esteban9167/)
