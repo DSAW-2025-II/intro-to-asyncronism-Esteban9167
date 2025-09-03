@@ -42,4 +42,4 @@
 
 ## 🌐 Despliegue  
 El proyecto está publicado en **GitHub Pages** en el siguiente enlace:  
-🔗 [https://dsaw-2025-ii.github.io/intro-to-asyncronism-Esteban9167/](https://dsaw-2025-ii.github.io/intro-to-asyncronism-Esteban9167/)
+🔗 [https://dom-esteban9167.vercel.app]
