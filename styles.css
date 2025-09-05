@@ -1,0 +1,333 @@
+/* ===================== */
+/* 0. Layout General     */
+/* ===================== */
+body {
+    margin: 0;
+    padding: 10px;
+    height: 100vh;
+    display: flex;
+    box-sizing: border-box;
+    background-color: #E6F4EA;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===================== */
+/* 1. Sidebar (main-bar) */
+/* ===================== */
+.main-bar {
+    flex: 0 0 auto;
+    width: 60px;
+    max-width: 60px;
+    background-color: #EF4036;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.main-bar>img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ===================== */
+/* 2. Central Section    */
+/* ===================== */
+.mid-card {
+    flex: 0 0 60%;
+    background-color: #E6F4EA;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    gap: 5px;
+    font-family: "Playfair Display SC", serif;
+    max-width: 1000px;
+
+}
+
+.header {
+    padding-block: 1rem;
+}
+
+.head-main {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-self: stretch;
+}
+
+.head-main p {
+    margin: 0;
+    font-size: 5vw;
+}
+
+.poke-ja {
+    opacity: 0.5;
+}
+
+/* ===================== */
+/* 3. Navigation         */
+/* ===================== */
+.nav {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.nav-item {
+    margin: 0;
+    gap: 5px;
+}
+
+/* ===================== */
+/* 4. Buttons            */
+/* ===================== */
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    text-transform: uppercase;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.20);
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.p {
+    background: #444;
+}
+
+/* ===================== */
+/* 5. Type Colors        */
+/* ===================== */
+.type-normal {
+    background: #A8A77A;
+}
+
+.type-fire {
+    background: #EE8130;
+}
+
+.type-water {
+    background: #6390F0;
+}
+
+.type-grass {
+    background: #7AC74C;
+}
+
+.type-electric {
+    background: #F7D02C;
+    color: black;
+}
+
+.type-ice {
+    background: #96D9D6;
+    color: black;
+}
+
+.type-fighting {
+    background: #C22E28;
+}
+
+.type-poison {
+    background: #A33EA1;
+}
+
+.type-ground {
+    background: #E2BF65;
+    color: black;
+}
+
+.type-flying {
+    background: #A98FF3;
+}
+
+.type-psychic {
+    background: #F95587;
+}
+
+.type-bug {
+    background: #A6B91A;
+}
+
+.type-rock {
+    background: #B6A136;
+}
+
+.type-ghost {
+    background: #735797;
+}
+
+.type-dragon {
+    background: #6F35FC;
+}
+
+.type-dark {
+    background: #705746;
+}
+
+.type-steel {
+    background: #B7B7CE;
+    color: black;
+}
+
+.type-fairy {
+    background: #D685AD;
+}
+
+/* ===================== */
+/* 6. Main Card          */
+/* ===================== */
+.main-card {
+    flex: 1;
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    max-width: 1000px;
+}
+
+/* ===================== */
+/* 7. Cards Container    */
+/* ===================== */
+.cards {
+   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+
+}
+
+/* ===================== */
+/* 8. Card Inner Content */
+/* ===================== */
+.pokemon-img img {
+    width: 140px;
+  height: 140px;
+  object-fit: contain;
+  display: block;
+}
+.pokemon-img {
+  position: relative;
+  z-index: 1;            /* encima del watermark */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;     /* reserva espacio visual */
+  margin-top: 8px;
+}
+
+/* ===================== */
+/* 9. Card Button        */
+/* ===================== */
+.card-btn {
+      display: block;
+  width: 100%;
+  background: #fff;
+  color: #111;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 14px 12px;
+  text-transform: uppercase;
+  position: relative; /* stacking context */
+  transition: transform .2s, box-shadow .2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.card{
+    position: relative;
+}
+
+.card-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
+}
+
+/* ===================== */
+/* 10. Pokemon ID Back   */
+/* ===================== */
+.pokemon-id-back {
+   position: absolute;
+  top: 0.6rem;           /* arriba, no centrado vertical */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;            /* detrás de la imagen y textos */
+  pointer-events: none;  /* no bloquea clics */
+  opacity: 0.08;         /* efecto watermark */
+  line-height: 1;
+  margin: 0;
+  font-weight: 900;
+  font-size: 6rem;       /* sin espacios raros */
+  font-family: "Playfair Display SC", serif;
+
+
+}
+.pokemon-id-back p{
+    font-size: 6rem;
+     margin: 0; /* quita márgenes extra */
+    line-height: 1;
+}
+.name-container {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.pokemon-info {
+  position: relative;
+  z-index: 1;            /* también por encima */
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+.pokemon-id {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+  text-transform: none;
+}
+.pokemon-name {
+  margin: 0;
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+/* Tipos */
+.type-pokemon {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.type-badge {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: white;
+  border: 1px solid #e5e7eb;
+}
+
+/* Stats */
+.pokemon-stats {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #374151;
+}
+.stats { margin: 0; }
