@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-bar">
+        <img src="/Img/pokedex_close.png" alt="Pokedex cerrada">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="icon-search">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="icon-random">
+            <path stroke-linecap="round" stroke-linejoin="round"
+                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+        </svg>
+        <img src="/Img/pokeball.png" alt="pokeball cerrada">
+    </div>
+
+    <div class="mid-card">
+        <div class="header">
+            <div class="head-main">
+                <p>pokedex</p>
+                <p class="poke-ja">ポケモン図鑑</p>
+            </div>
+
+            <div>
+                <ul class="nav">
+                    <li class="nav-item"><button class="btn p" id="see-all">See All</button></li>
+                    <li class="nav-item"><button class="btn type-normal" id="normal">Normal</button></li>
+                    <li class="nav-item"><button class="btn type-fire" id="fire">Fire</button></li>
+                    <li class="nav-item"><button class="btn type-water" id="water">Water</button></li>
+                    <li class="nav-item"><button class="btn type-grass" id="grass">Grass</button></li>
+                    <li class="nav-item"><button class="btn type-electric" id="electric">Electric</button></li>
+                    <li class="nav-item"><button class="btn type-ice" id="ice">Ice</button></li>
+                    <li class="nav-item"><button class="btn type-fighting" id="fighting">Fighting</button></li>
+                    <li class="nav-item"><button class="btn type-poison" id="poison">Poison</button></li>
+                    <li class="nav-item"><button class="btn type-ground" id="ground">Ground</button></li>
+                    <li class="nav-item"><button class="btn type-flying" id="flying">Flying</button></li>
+                    <li class="nav-item"><button class="btn type-psychic" id="psychic">Psychic</button></li>
+                    <li class="nav-item"><button class="btn type-bug" id="bug">Bug</button></li>
+                    <li class="nav-item"><button class="btn type-rock" id="rock">Rock</button></li>
+                    <li class="nav-item"><button class="btn type-ghost" id="ghost">Ghost</button></li>
+                    <li class="nav-item"><button class="btn type-dragon" id="dragon">Dragon</button></li>
+                    <li class="nav-item"><button class="btn type-dark" id="dark">Dark</button></li>
+                    <li class="nav-item"><button class="btn type-steel" id="steel">Steel</button></li>
+                    <li class="nav-item"><button class="btn type-fairy" id="fairy">Fairy</button></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <button class="card-btn" id="bulbasaur">
+                    <p class="pokemon-id-back">#0001</p>
+                    <div class="pokemon-img">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                            alt="bulbasaur">
+                    </div>
+                    <div class="pokemon-info">
+                        <div class="name-container">
+                            <p class="pokemon-id">#0001</p>
+                            <h2 class="pokemon-name">bulbasaur</h2>
+                        </div>
+                        <div class="type-pokemon">
+                            <p class="type-badge type-grass">Grass</p>
+                            <p class="type-badge type-poison">Poison</p>
+
+                        </div>
+                        <div class="pokemon-stats">
+                            <p class="stats">0,7 M</p>
+                            <p class="stats">6,7 Kg</p>
+
+                        </div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="card">
+                <button class="card-btn" id="bulbasaur">
+                    <p class="pokemon-id-back">#0001</p>
+                    <div class="pokemon-img">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                            alt="bulbasaur">
+                    </div>
+                    <div class="pokemon-info">
+                        <div class="name-container">
+                            <p class="pokemon-id">#0001</p>
+                            <h2 class="pokemon-name">bulbasaur</h2>
+                        </div>
+                        <div class="type-pokemon">
+                            <p class="type-badge type-grass">Grass</p>
+                            <p class="type-badge type-poison">Poison</p>
+
+                        </div>
+                        <div class="pokemon-stats">
+                            <p class="stats">0,7 M</p>
+                            <p class="stats">6,7 KG</p>
+
+                        </div>
+                    </div>
+                </button>
+            </div>
+            
+            <div class="card">
+                <button class="card-btn" id="bulbasaur">
+                    <p class="pokemon-id-back">#0001</p>
+                    <div class="pokemon-img">
+                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                            alt="bulbasaur">
+                    </div>
+                    <div class="pokemon-info">
+                        <div class="name-container">
+                            <p class="pokemon-id">#0001</p>
+                            <h2 class="pokemon-name">bulbasaur</h2>
+                        </div>
+                        <div class="type-pokemon">
+                            <p class="type-badge type-grass">Grass</p>
+                            <p class="type-badge type-poison">Poison</p>
+
+                        </div>
+                        <div class="pokemon-stats">
+                            <p class="stats">0,7 M</p>
+                            <p class="stats">6,7 KG</p>
+
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <p>menu</p>
+    </div>
+</body>
+
+</html>
