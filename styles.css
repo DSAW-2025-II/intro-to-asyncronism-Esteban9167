@@ -1,14 +1,22 @@
 /* ===================== */
 /* 0. Layout General     */
 /* ===================== */
+html,
+body {
+    /* + añadido: necesario para controlar el alto */
+    height: 100%;
+}
+
 body {
     margin: 0;
     padding: 10px;
     height: 100vh;
     display: flex;
     box-sizing: border-box;
-    background-color: #E6F4EA;
+    background-color: #F3E5E5;
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
+    /* + añadido: bloquea scroll global */
 }
 
 /* ===================== */
@@ -18,7 +26,7 @@ body {
     flex: 0 0 auto;
     width: 60px;
     max-width: 60px;
-    background-color: #EF4036;
+    background-color: #DF5A55;
     color: white;
     display: flex;
     flex-direction: column;
@@ -26,6 +34,8 @@ body {
     align-items: center;
     padding: 10px;
     border-radius: 25px;
+    overflow: hidden;
+    /* + añadido: evita scroll en sidebar */
 }
 
 .main-bar>img {
@@ -39,8 +49,8 @@ body {
 /* 2. Central Section    */
 /* ===================== */
 .mid-card {
-    flex: 0 0 60%;
-    background-color: #E6F4EA;
+    flex: 0 0 50%;
+    background-color: #F3E5E5;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -50,6 +60,14 @@ body {
     font-family: "Playfair Display SC", serif;
     max-width: 1000px;
 
+    /* + añadidos: scroll solo aquí */
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 20px);
+    /* compensa padding 10px top/bottom del body */
+    min-height: 0;
+    scrollbar-gutter: stable;
+    overscroll-behavior: contain;
 }
 
 .header {
@@ -58,9 +76,16 @@ body {
 
 .head-main {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
+    /* en vez de "left" */
     width: 100%;
     align-self: stretch;
+    flex-direction: row;
+    /* los hijos van en fila */
+    flex-wrap: wrap;
+    /* si no caben, saltan a la siguiente línea */
+    gap: 10px;
+    /* opcional: espacio entre ellos */
 }
 
 .head-main p {
@@ -197,21 +222,24 @@ body {
 /* ===================== */
 .main-card {
     flex: 1;
-    background-color: green;
+    background-color: #DF5A55;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 25px;
-    max-width: 1000px;
+    max-width: none;
+    overflow: hidden;
+    /* + añadido: evita scroll en esta columna */
 }
 
 /* ===================== */
 /* 7. Cards Container    */
 /* ===================== */
 .cards {
-   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    min-width: 20rem;
 
 }
 
@@ -220,39 +248,45 @@ body {
 /* ===================== */
 .pokemon-img img {
     width: 140px;
-  height: 140px;
-  object-fit: contain;
-  display: block;
+    height: 140px;
+    object-fit: contain;
+    display: block;
 }
+
 .pokemon-img {
-  position: relative;
-  z-index: 1;            /* encima del watermark */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 140px;     /* reserva espacio visual */
-  margin-top: 8px;
+    position: relative;
+    z-index: 1;
+    /* encima del watermark */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 140px;
+    /* reserva espacio visual */
+    margin-top: 8px;
 }
 
 /* ===================== */
 /* 9. Card Button        */
 /* ===================== */
 .card-btn {
-      display: block;
-  width: 100%;
-  background: #fff;
-  color: #111;
-  border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  overflow: hidden;
-  padding: 14px 12px;
-  text-transform: uppercase;
-  position: relative; /* stacking context */
-  transition: transform .2s, box-shadow .2s;
-  -webkit-appearance: none;
-  appearance: none;
+    display: block;
+    width: 100%;
+    background: #fff;
+    color: #111;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 14px 12px;
+    text-transform: uppercase;
+    position: relative;
+    /* stacking context */
+    transition: transform .2s, box-shadow .2s;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
 }
-.card{
+
+.card {
     position: relative;
 }
 
@@ -261,73 +295,252 @@ body {
     box-shadow: 0 8px 18px rgba(0, 0, 0, .08);
 }
 
+@media screen and (min-width: 1348px) {
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        min-width: 20rem;
+
+    }
+
+    .card-btn {
+        display: block;
+        width: 100%;
+        background: #fff;
+        color: #111;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 14px 12px;
+        text-transform: uppercase;
+        position: relative;
+        /* stacking context */
+        transition: transform .2s, box-shadow .2s;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        min-width: 20rem;
+
+    }
+
+
+}
+
+@media screen and (max-width: 768px) {
+    .main-card {
+        display: none;
+        /* desaparece */
+    }
+
+    .mid-card {
+        flex: 1;
+        /* ahora ocupa todo el espacio disponible */
+        max-width: none;
+        /* quita el límite que tenías */
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        min-width: 20rem;
+
+    }
+
+    .card-btn {
+        display: block;
+        width: 100%;
+        background: #fff;
+        color: #111;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 14px 12px;
+        text-transform: uppercase;
+        position: relative;
+        /* stacking context */
+        transition: transform .2s, box-shadow .2s;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        min-width: 18rem;
+
+    }
+}
+
+@media screen and (max-width: 702px) {
+    .main-card {
+        display: none;
+        /* desaparece */
+    }
+
+    .mid-card {
+        flex: 1;
+        /* ahora ocupa todo el espacio disponible */
+        max-width: none;
+        /* quita el límite que tenías */
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        min-width: 20rem;
+
+    }
+
+    .card-btn {
+        display: block;
+        width: 100%;
+        background: #fff;
+        color: #111;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+        padding: 14px 12px;
+        text-transform: uppercase;
+        position: relative;
+        /* stacking context */
+        transition: transform .2s, box-shadow .2s;
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        min-width: 20rem;
+
+    }
+}
+
+@media screen and (max-width: 440px) {
+  body {
+    flex-direction: column; /* de fila a columna */
+  }
+
+  .main-bar {
+    width: 100%;             /* ocupa todo el ancho */
+    max-width: none;         /* quita el límite de 60px */
+    flex: 0 0 auto;          /* no forzar tamaño fijo */
+    flex-direction: row;     /* íconos/botones en fila */
+    justify-content: space-around;
+    align-items: center;
+    min-width: 0;            /* evita overflow lateral */
+  }
+}
+
+
+
 /* ===================== */
 /* 10. Pokemon ID Back   */
 /* ===================== */
 .pokemon-id-back {
-   position: absolute;
-  top: 0.6rem;           /* arriba, no centrado vertical */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 0;            /* detrás de la imagen y textos */
-  pointer-events: none;  /* no bloquea clics */
-  opacity: 0.08;         /* efecto watermark */
-  line-height: 1;
-  margin: 0;
-  font-weight: 900;
-  font-size: 6rem;       /* sin espacios raros */
-  font-family: "Playfair Display SC", serif;
-
-
-}
-.pokemon-id-back p{
+    position: absolute;
+    top: 0.6rem;
+    /* arriba, no centrado vertical */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
+    /* detrás de la imagen y textos */
+    pointer-events: none;
+    /* no bloquea clics */
+    opacity: 0.08;
+    /* efecto watermark */
+    line-height: 1;
+    margin: 0;
+    font-weight: 900;
     font-size: 6rem;
-     margin: 0; /* quita márgenes extra */
+    /* sin espacios raros */
+    font-family: "Playfair Display SC", serif;
+}
+
+.pokemon-id-back p {
+    font-size: 5.5rem;
+    margin: 0;
+    /* quita márgenes extra */
     line-height: 1;
 }
+
 .name-container {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    justify-content: center;
 }
+
 .pokemon-info {
-  position: relative;
-  z-index: 1;            /* también por encima */
-  display: grid;
-  gap: 8px;
-  margin-top: 8px;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
 }
+
 .pokemon-id {
-  margin: 0;
-  font-size: 12px;
-  color: #6b7280;
-  text-transform: none;
+    margin: 0;
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: .25rem .5rem;
+    border-radius: 100vmax;
+    font-size: .75rem;
+    font-weight: 500;
 }
+
 .pokemon-name {
-  margin: 0;
-  font-size: 18px;
-  text-transform: capitalize;
+    margin: 0;
+    font-size: 1.4rem;
+    text-transform: capitalize;
 }
 
 /* Tipos */
 .type-pokemon {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: .5rem;
+    font-size: .95;
+    font-weight: 500;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
 .type-badge {
-  padding: 4px 8px;
-  border-radius: 999px;
-  font-size: 12px;
-  color: white;
-  border: 1px solid #e5e7eb;
+    padding: 4px 8px;
+    border-radius: 100vmax;
+    font-size: 14px;
+    color: white;
+    border: 1px solid #e5e7eb;
 }
 
 /* Stats */
 .pokemon-stats {
-  display: flex;
-  gap: 12px;
-  font-size: 12px;
-  color: #374151;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #374151;
+    justify-content: center;
 }
-.stats { margin: 0; }
+
+.stats {
+    margin: 0;
+    padding: .25rem .5rem;
+    border-radius: 100vmax;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ====== (Opcional) Estilos de la barra solo en mid-card ====== */
+.mid-card::-webkit-scrollbar {
+    width: 10px;
+}
+
+.mid-card::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, .08);
+    border-radius: 8px;
+}
+
+.mid-card::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .25);
+    border-radius: 8px;
+}
+
+.mid-card::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, .35);
+}
