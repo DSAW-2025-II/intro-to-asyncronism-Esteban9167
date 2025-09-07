@@ -31,7 +31,7 @@ body {
   align-items: center;
   padding: 10px;
   border-radius: 25px;
-  overflow: hidden; /* evita scroll en sidebar */
+  overflow: hidden;
 }
 
 .main-bar > img {
@@ -45,7 +45,7 @@ body {
 /* 2. Central Section    */
 /* ===================== */
 .mid-card {
-  flex: 0 0 50%;
+  flex: 0 0 40%;
   background-color: #F3E5E5;
   display: flex;
   flex-direction: column;
@@ -56,7 +56,6 @@ body {
   font-family: "Playfair Display SC", serif;
   max-width: 1000px;
 
-  /* scroll solo aquí */
   overflow-y: auto;
   overflow-x: hidden;
   max-height: calc(100vh - 20px);
@@ -149,18 +148,48 @@ body {
   position: relative;
   flex: 1;
   color: #fff;
-  background-color: #DF5A55;
+  background: var(--poke-bg, #DF5A55);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* contenido arriba */
+  justify-content: flex-start;
   align-items: center;
   border-radius: 25px;
   max-width: none;
   overflow: hidden;
   padding: 20px;
+  transition: background 180ms ease-in-out;
 }
 
-/* Number */
+/* Estados de contraste según especie */
+.main-card.main-card--light { color: #1f2937; }
+.main-card.main-card--dark  { color: #ffffff; }
+
+.main-card.themed-by-species .pokemon-name,
+.main-card.themed-by-species .number .idPoke,
+.main-card.themed-by-species .basic-pokemon .region,
+.main-card.themed-by-species .pokemon-name-ja,
+.main-card.themed-by-species .type,
+.main-card.themed-by-species .all-stats,
+.main-card.themed-by-species .stats p,
+.main-card.themed-by-species .back {
+  color: inherit;
+}
+
+/* Paneles internos con transparencia según modo */
+.main-card.main-card--dark  .basic-pokemon,
+.main-card.main-card--dark  .type,
+.main-card.main-card--dark  .all-stats {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(2px);
+}
+.main-card.main-card--light .basic-pokemon,
+.main-card.main-card--light .type,
+.main-card.main-card--light .all-stats {
+  background: rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(2px);
+}
+
+/* Número */
 .main-card .number {
   display: flex;
   align-items: center;
@@ -176,7 +205,7 @@ body {
   letter-spacing: 1px;
   font-size: 2rem;
   line-height: 1;
-  color: #fff;
+  color: inherit;
 }
 
 .main-card .back {
@@ -187,7 +216,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 6px;
-  color: #fff;
+  color: inherit;
 }
 .main-card .back svg {
   width: 32px;
@@ -203,14 +232,13 @@ body {
   line-height: 1.1;
   text-transform: capitalize;
   letter-spacing: 1px;
-  color: #fff;
+  color: inherit;
   text-align: center;
 }
 
 /* === Bloque Básico === */
 .basic-pokemon {
   width: 100%;
-  color: #000;
   border-radius: 16px;
   padding: 12px 14px;
   display: grid;
@@ -228,7 +256,6 @@ body {
   font-size: 0.95rem;
   text-transform: capitalize;
   position: relative;
-  
 }
 .basic-pokemon .region::before {
   content: "REGIÓN";
@@ -240,7 +267,7 @@ body {
   opacity: .6;
 }
 
-/* Nombre japonés watermark */
+/* Nombre japonés watermark (discreto) */
 .main-card .pokemon-name-ja {
   position: absolute;
   top: 12%;
@@ -250,18 +277,24 @@ body {
   font-weight: 900;
   font-size: 6rem;
   line-height: 1;
-  opacity: 0.08;
+  opacity: 0.08;           /* ← discreto, no tapa el arte */
   pointer-events: none;
-  color: #000;
+  color: currentColor;
 }
 
-/* Imagen oficial */
+/* Imagen oficial (segmento controlado) */
+.basic-pokemon .pokemon-img {
+  width: 100%;
+  height: 260px;           /* ← altura fija del segmento */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .basic-pokemon .pokemon-img img {
-  width: 220px;
-  height: 220px;
+  max-width: 90%;
+  max-height: 100%;
   object-fit: contain;
   display: block;
-  margin: 0 auto;
 }
 
 /* Tipos */
@@ -271,17 +304,14 @@ body {
   gap: 12px;
   justify-content: center;
   align-items: center;
-  color: #000;
   border-radius: 16px;
   padding: 10px 12px;
   margin-bottom: 12px;
 }
 
-
 /* Stats */
 .all-stats {
   width: 100%;
-  color: #000;
   border-radius: 16px;
   padding: 12px 14px;
   display: flex;
@@ -304,6 +334,7 @@ body {
     right: 6%;
     top: 14%;
   }
+  .basic-pokemon .pokemon-img { height: 220px; } /* un poco más compacta en móvil */
 }
 
 /* ===================== */
@@ -460,10 +491,79 @@ body {
   background: rgba(0, 0, 0, .35);
 }
 
+/* ====== Botón icono en sidebar ====== */
+.icon-btn {
+  all: unset;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #fff;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.12); }
+.icon-search { width: 28px; height: 28px; }
+
+/* ====== Panel de búsqueda ====== */
+.search-panel {
+  position: fixed;
+  top: 16px;
+  left: 90px;               /* aparece junto a la sidebar */
+  z-index: 1000;
+  display: none;            /* se muestra con la clase .open */
+  width: min(420px, 90vw);
+  background: #ffffff;
+  color: #111;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  padding: 14px;
+}
+.search-panel.open { display: block; }
+
+.search-label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 250px;        /* proporcional/compacto */
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+}
+.search-input:focus { border-color: #6b7280; }
+
+.search-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.search-error {
+  margin: 8px 0 0 0;
+  color: #b91c1c;           /* rojo error */
+  min-height: 1.2em;        /* para que no salte el layout */
+  font-size: 0.9rem;
+}
+
+/* Responsive: en pantallas chicas, centrado arriba */
+@media (max-width: 600px) {
+  .search-panel { left: 50%; transform: translateX(-50%); top: 10px; }
+}
+
 /* ===================== */
 /* 13. Responsive        */
 /* ===================== */
 @media screen and (min-width: 1348px) {
+  .mid-card { flex: 0 0 50%; }
   .cards {
     grid-template-columns: 1fr 1fr;
     gap: 14px;
@@ -471,7 +571,7 @@ body {
   }
   .card-btn { min-width: 20rem; }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 910px) {
   .main-card { display: none; }
   .mid-card {
     flex: 1;
