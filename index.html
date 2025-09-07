@@ -5,15 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokedex</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Poppins:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Poppins:ital,wght@0,400;0,600;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap"
         rel="stylesheet">
 </head>
 
 <body>
+    <!-- Sidebar -->
     <div class="main-bar">
         <img src="/Img/pokedex_close.png" alt="Pokedex cerrada">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -29,6 +34,7 @@
         <img src="/Img/pokeball.png" alt="pokeball cerrada">
     </div>
 
+    <!-- Mid card: filtros y grilla -->
     <div class="mid-card">
         <div class="header">
             <div class="head-main">
@@ -62,13 +68,80 @@
         </div>
 
         <div class="cards" id="listPokemon">
-            <!--  Here goes the list of Pokémon. If I don’t write it down, I will forget. -->
+            <!-- Aquí se pintan los Pokémon cargados -->
         </div>
     </div>
 
+    <!-- Main card: detalle seleccionado -->
     <div class="main-card">
-        <p>menu</p>
+        <!-- Número con flechas -->
+        <div class="number">
+            <button class="back" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+                </svg>
+            </button>
+            <p class="idPoke">1</p>
+            <button class="back" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Nombre -->
+        <p class="pokemon-name">bulbasaur</p>
+
+        <!-- Región + Nombre JP + Imagen -->
+        <div class="basic-pokemon">
+            <p class="region">Kanto</p>
+            <p class="pokemon-name-ja">フシギダネ</p>
+            <p class="pokemon-img">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+                    alt="bulbasaur">
+            </p>
+        </div>
+
+        <!-- Tipos -->
+        <div class="type">
+            <p class="type-img">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/12.png"
+                    alt="grass">
+            </p>
+            <p class="type-img">
+                <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/4.png"
+                    alt="poison">
+            </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="all-stats">
+            <div class="stats">
+                <p>HP:</p>
+            </div>
+            <div class="stats">
+                <p>Attack:</p>
+            </div>
+            <div class="stats">
+                <p>Defense:</p>
+            </div>
+            <div class="stats">
+                <p>Sp. Attack:</p>
+            </div>
+            <div class="stats">
+                <p>Sp. Defense:</p>
+            </div>
+            <div class="stats">
+                <p>Speed:</p>
+            </div>
+        </div>
     </div>
+
+    <!-- JS -->
     <script src="./main.js"></script>
 </body>
 
