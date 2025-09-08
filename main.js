@@ -1,13 +1,11 @@
-// =========================
-// 0) Referencias y helpers
-// =========================
+
+// === DOM refs & constants ===
 const listPokemon  = document.querySelector("#listPokemon");
 const BASE_URL     = "https://pokeapi.co/api/v2/pokemon/";
 const SPECIES_URL  = "https://pokeapi.co/api/v2/pokemon-species/";
-const TOTAL_DEX = 1025; // total de la Pokédex nacional
+const TOTAL_DEX    = 1025;
 
-
-// Referencias dentro de la main-card
+// main-card refs
 const mainCard     = document.querySelector(".main-card");
 const idPokeEl     = mainCard.querySelector(".number .idPoke");
 const nameEl       = mainCard.querySelector(".pokemon-name");
@@ -20,13 +18,13 @@ const [prevBtn, nextBtn] = mainCard.querySelectorAll(".number .back");
 
 let currentId = null;
 
-// Mapa nombre->id de tipo para íconos oficiales
+// type name -> type id (for official icons)
 const TYPE_ID = {
   normal:1, fighting:2, flying:3, poison:4, ground:5, rock:6, bug:7, ghost:8, steel:9,
   fire:10, water:11, grass:12, electric:13, psychic:14, ice:15, dragon:16, dark:17, fairy:18
 };
 
-// Mapa generation -> región
+// generation -> region
 const GEN_REGION = {
   "generation-i":"Kanto",
   "generation-ii":"Johto",
@@ -39,35 +37,20 @@ const GEN_REGION = {
   "generation-ix":"Paldea"
 };
 
-// Helper: #0001
+// helpers
 const padId = (n) => `#${String(n).padStart(4, "0")}`;
-
-// Helper: URL imagen oficial
 const officialArt = (id) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
-
-// Helper: URL ícono de tipo
 const typeIcon = (typeName) =>
   `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/${TYPE_ID[typeName]}.png`;
 
-
-// =========================
-// 0.1) Colores por especie
-// =========================
+// === Species color -> theme ===
 const SPECIES_COLOR_HEX = {
-  black:  "#2B2B2B",
-  blue:   "#6FA3EF",
-  brown:  "#8B5E3C",
-  gray:   "#9AA0A6",
-  green:  "#7AC74C",
-  pink:   "#F4A7C5",
-  purple: "#A78BFA",
-  red:    "#F87171",
-  white:  "#F5F5F5",
-  yellow: "#F8D34A",
+  black:"#2B2B2B", blue:"#6FA3EF", brown:"#8B5E3C", gray:"#9AA0A6",
+  green:"#7AC74C", pink:"#F4A7C5", purple:"#A78BFA", red:"#F87171",
+  white:"#F5F5F5", yellow:"#F8D34A",
 };
 
-// utilidades para contraste
 function hexToRgb(hex) {
   const m = hex.replace("#","").match(/.{1,2}/g);
   if (!m) return {r:0,g:0,b:0};
@@ -75,10 +58,7 @@ function hexToRgb(hex) {
   return { r, g, b };
 }
 function relLum({r,g,b}) {
-  const f = (u)=> {
-    u/=255;
-    return (u<=0.03928)? u/12.92 : Math.pow((u+0.055)/1.055, 2.4);
-  };
+  const f = (u)=>{ u/=255; return (u<=0.03928)? u/12.92 : Math.pow((u+0.055)/1.055, 2.4); };
   const R=f(r), G=f(g), B=f(b);
   return 0.2126*R + 0.7152*G + 0.0722*B;
 }
@@ -87,16 +67,14 @@ function pickTextMode(bgHex) {
   return (L > 0.5) ? "light" : "dark";
 }
 
-// aplicar color a main-card
+// apply theme to main-card based on species color
 async function applySpeciesColor(speciesData, targetEl = mainCard) {
   try {
     const colorName = speciesData?.color?.name || "gray";
     const hex = SPECIES_COLOR_HEX[colorName] || SPECIES_COLOR_HEX.gray;
 
-    // variable CSS para el fondo
     targetEl.style.setProperty("--poke-bg", hex);
 
-    // modo de texto
     const mode = pickTextMode(hex);
     targetEl.classList.remove("main-card--light", "main-card--dark");
     targetEl.classList.add(mode === "light" ? "main-card--light" : "main-card--dark");
@@ -107,10 +85,7 @@ async function applySpeciesColor(speciesData, targetEl = mainCard) {
   }
 }
 
-
-// =====================================
-// 1) Construir una card para la grilla
-// =====================================
+// === Grid card builder ===
 function showPokemon(p) {
   const id     = p.id;
   const name   = p.name;
@@ -144,17 +119,13 @@ function showPokemon(p) {
   `;
 
   div.querySelector(".card-btn").addEventListener("click", () => {
-    console.log("Pokémon ID:", id);
     selectPokemonById(id);
   });
 
   listPokemon.append(div);
 }
 
-
-// ===================================
-// 2) Cargar muchos Pokémon (con filtro)
-// ===================================
+// === Bulk load (with optional type filter) ===
 async function loadPokemons(from = 1, to = 151, filterType = null) {
   try {
     listPokemon.replaceChildren();
@@ -185,26 +156,17 @@ async function loadPokemons(from = 1, to = 151, filterType = null) {
   }
 }
 
-
-// ===================================
-// 3) Botones de filtro del header
-// ===================================
+// === Header filter buttons ===
 const buttonsHeader = document.querySelectorAll(".nav .btn");
 buttonsHeader.forEach((button) => {
   button.addEventListener("click", (event) => {
     const btnId = event.currentTarget.id;
     const filterType = (btnId === "see-all") ? null : btnId.toLowerCase();
-
-    // Cargar TODO el dex (1..1025) con o sin filtro
     loadPokemons(1, TOTAL_DEX, filterType);
   });
 });
 
-
-
-// ===================================
-// 4) Rellenar la MAIN-CARD seleccionada
-// ===================================
+// === Fill the right main-card with selected Pokémon ===
 async function selectPokemonById(id) {
   try {
     const p = await fetch(`${BASE_URL}${id}`).then(r => {
@@ -216,7 +178,6 @@ async function selectPokemonById(id) {
       return r.json();
     });
 
-    // === aplicar color de especie ===
     await applySpeciesColor(s, mainCard);
 
     currentId = id;
@@ -271,10 +232,7 @@ async function selectPokemonById(id) {
   }
 }
 
-
-// ===================================
-// 5) Navegación prev/next en main-card
-// ===================================
+// === Prev/next navigation in main-card ===
 prevBtn?.addEventListener("click", () => {
   if (!currentId) return;
   const prev = Math.max(1, currentId - 1);
@@ -287,21 +245,15 @@ nextBtn?.addEventListener("click", () => {
   selectPokemonById(next);
 });
 
-// ====== Botón Random ======
+// === Random button ===
 const randomBtn = document.getElementById("random-btn");
-
 randomBtn?.addEventListener("click", () => {
-  // total de pokémon en la Pokédex nacional
-  const total = 1025; 
-  const randomId = Math.floor(Math.random() * total) + 1; // 1 a 1025
+  const total = 1025;
+  const randomId = Math.floor(Math.random() * total) + 1;
   selectPokemonById(randomId);
 });
 
-
-
-// ===================================
-// 6) Búsqueda por nombre o ID (lupa)
-// ===================================
+// === Search (panel & form) ===
 const searchToggleBtn = document.getElementById("search-toggle");
 const searchPanel     = document.getElementById("search-panel");
 const searchForm      = document.getElementById("search-form");
@@ -374,10 +326,6 @@ document.addEventListener("keydown", (ev) => {
   }
 });
 
-
-// ========================
-// 7) Carga inicial (grid)
-// ========================
+// === Initial load ===
 loadPokemons(1, TOTAL_DEX, null);
 selectPokemonById(1);
-
