@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/fOa_bXW6)
 # Desarrollo de Aplicaciones Web
 ## Introducción al Asíncronismo
 
@@ -21,6 +22,10 @@
 - [¿Cómo manejar el asíncronismo correctamente?](https://www.youtube.com/watch?v=vn3tm0quoqE&pp=ygUWYXN5bmMgYXdhaXQgamF2YXNjcmlwdA%3D%3D)
 
 
+
+
+
+
 ## Rúbrica
 
 | Criterio           | Puntaje |
@@ -29,4 +34,29 @@
 | Diseño             | 1       |
 | Calidad del código     | 1.5     |
 | Funcionalidad      | 1.5      |
+
+
+
+# Pokedex Project
+
+## Author
+- **Name:** Esteban Sequeda Henao  
+- **Email:** estebansehe@unisbana.edu.co  
+- **ID:** 0000328378  
+
+## Deployment
+You can access the deployed project here:  
+👉 [Pokedex on Vercel](https://pokedex-m4ak6s8r2-esteban9167s-projects.vercel.app)
+
+## Future Development
+There are still some features and improvements I plan to add in the future, such as:
+
+- Better responsive design for mobile and tablet devices.  
+- Improved styling and animations for a more dynamic user experience.  
+- Search filters by Pokémon type and generation.  
+- Dark mode toggle.  
+- Integration with more endpoints from the PokeAPI (abilities, moves, stats).  
+- Unit tests and code refactoring for better maintainability.  
+
+This is an ongoing project, so feedback and suggestions are always welcome 🚀
 
