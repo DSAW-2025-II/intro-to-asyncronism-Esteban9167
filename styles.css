@@ -562,15 +562,4 @@ body {
   }
   .card-btn { min-width: 20rem; }
 }
-@media screen and (max-width: 440px) {
-  body { flex-direction: column; }
-  .main-bar {
-    width: 100%;
-    max-width: none;
-    flex: 0 0 auto;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    min-width: 0;
-  }
-}
+
