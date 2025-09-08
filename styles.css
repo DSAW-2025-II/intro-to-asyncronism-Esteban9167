@@ -267,7 +267,7 @@ body {
   opacity: .6;
 }
 
-/* Nombre japonés watermark (discreto) */
+/* Nombre japonés watermark */
 .main-card .pokemon-name-ja {
   position: absolute;
   top: 12%;
@@ -277,24 +277,18 @@ body {
   font-weight: 900;
   font-size: 6rem;
   line-height: 1;
-  opacity: 0.08;           /* ← discreto, no tapa el arte */
+  opacity: 0.8;
   pointer-events: none;
   color: currentColor;
 }
 
-/* Imagen oficial (segmento controlado) */
-.basic-pokemon .pokemon-img {
-  width: 100%;
-  height: 260px;           /* ← altura fija del segmento */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* Imagen oficial */
 .basic-pokemon .pokemon-img img {
-  max-width: 90%;
-  max-height: 100%;
+  width: 220px;
+  height: 220px;
   object-fit: contain;
   display: block;
+  margin: 0 auto;
 }
 
 /* Tipos */
@@ -334,7 +328,6 @@ body {
     right: 6%;
     top: 14%;
   }
-  .basic-pokemon .pokemon-img { height: 220px; } /* un poco más compacta en móvil */
 }
 
 /* ===================== */
@@ -490,7 +483,6 @@ body {
 .mid-card::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 0, 0, .35);
 }
-
 /* ====== Botón icono en sidebar ====== */
 .icon-btn {
   all: unset;
@@ -530,15 +522,18 @@ body {
 }
 
 .search-input {
-  width: 100%;
-  max-width: 250px;        /* proporcional/compacto */
+  width: 100%;             /* ← cámbialo por un valor fijo o máximo */
+  max-width: 250px;        /* así no se expande demasiado */
   padding: 8px 10px;
   border: 1px solid #d1d5db;
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
 }
-.search-input:focus { border-color: #6b7280; }
+.search-input:focus {
+  border-color: #6b7280;
+}
+
 
 .search-actions {
   display: flex;
@@ -563,7 +558,9 @@ body {
 /* 13. Responsive        */
 /* ===================== */
 @media screen and (min-width: 1348px) {
-  .mid-card { flex: 0 0 50%; }
+    .mid-card{
+        flex: 0 0 50%;
+    }
   .cards {
     grid-template-columns: 1fr 1fr;
     gap: 14px;
