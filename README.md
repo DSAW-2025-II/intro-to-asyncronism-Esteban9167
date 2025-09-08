@@ -35,3 +35,28 @@
 | Calidad del código     | 1.5     |
 | Funcionalidad      | 1.5      |
 
+
+
+# Pokedex Project
+
+## Author
+- **Name:** Esteban Sequeda Henao  
+- **Email:** estebansehe@unisbana.edu.co  
+- **ID:** 0000328378  
+
+## Deployment
+You can access the deployed project here:  
+👉 [Pokedex on Vercel](https://pokedex-m4ak6s8r2-esteban9167s-projects.vercel.app)
+
+## Future Development
+There are still some features and improvements I plan to add in the future, such as:
+
+- Better responsive design for mobile and tablet devices.  
+- Improved styling and animations for a more dynamic user experience.  
+- Search filters by Pokémon type and generation.  
+- Dark mode toggle.  
+- Integration with more endpoints from the PokeAPI (abilities, moves, stats).  
+- Unit tests and code refactoring for better maintainability.  
+
+This is an ongoing project, so feedback and suggestions are always welcome 🚀
+
