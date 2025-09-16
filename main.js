@@ -1,9 +1,10 @@
-
 // === DOM refs & constants ===
 const listPokemon  = document.querySelector("#listPokemon");
-const BASE_URL     = "https://pokeapi.co/api/v2/pokemon/";
-const SPECIES_URL  = "https://pokeapi.co/api/v2/pokemon-species/";
-const TOTAL_DEX    = 1025;
+
+// Vars desde config.js (window.env)
+const BASE_URL    = (window.env && window.env.BASE_URL)    || "https://pokeapi.co/api/v2/pokemon/";
+const SPECIES_URL = (window.env && window.env.SPECIES_URL) || "https://pokeapi.co/api/v2/pokemon-species/";
+const TOTAL_DEX   = Number((window.env && window.env.TOTAL_DEX) || 1025);
 
 // main-card refs
 const mainCard     = document.querySelector(".main-card");
@@ -74,11 +75,9 @@ async function applySpeciesColor(speciesData, targetEl = mainCard) {
     const hex = SPECIES_COLOR_HEX[colorName] || SPECIES_COLOR_HEX.gray;
 
     targetEl.style.setProperty("--poke-bg", hex);
-
     const mode = pickTextMode(hex);
     targetEl.classList.remove("main-card--light", "main-card--dark");
     targetEl.classList.add(mode === "light" ? "main-card--light" : "main-card--dark");
-
     targetEl.classList.add("themed-by-species");
   } catch (e) {
     console.error("No se pudo aplicar color de especie:", e);
@@ -117,11 +116,7 @@ function showPokemon(p) {
       </div>
     </button>
   `;
-
-  div.querySelector(".card-btn").addEventListener("click", () => {
-    selectPokemonById(id);
-  });
-
+  div.querySelector(".card-btn").addEventListener("click", () => selectPokemonById(id));
   listPokemon.append(div);
 }
 
@@ -129,13 +124,11 @@ function showPokemon(p) {
 async function loadPokemons(from = 1, to = 151, filterType = null) {
   try {
     listPokemon.replaceChildren();
-
     const ids = Array.from({ length: to - from + 1 }, (_, i) => from + i);
     const chunkSize = 20;
 
     for (let i = 0; i < ids.length; i += chunkSize) {
       const chunk = ids.slice(i, i + chunkSize);
-
       const results = await Promise.all(
         chunk.map(id =>
           fetch(`${BASE_URL}${id}`).then(r => {
@@ -144,7 +137,6 @@ async function loadPokemons(from = 1, to = 151, filterType = null) {
           })
         )
       );
-
       results.forEach(p => {
         if (!filterType) return showPokemon(p);
         const t = p.types.map(x => x.type.name);
@@ -181,7 +173,6 @@ async function selectPokemonById(id) {
     await applySpeciesColor(s, mainCard);
 
     currentId = id;
-
     idPokeEl.textContent = padId(id);
     nameEl.textContent = p.name;
 
@@ -241,15 +232,14 @@ prevBtn?.addEventListener("click", () => {
 
 nextBtn?.addEventListener("click", () => {
   if (!currentId) return;
-  const next = currentId + 1;
+  const next = Math.min(TOTAL_DEX, currentId + 1);
   selectPokemonById(next);
 });
 
 // === Random button ===
 const randomBtn = document.getElementById("random-btn");
 randomBtn?.addEventListener("click", () => {
-  const total = 1025;
-  const randomId = Math.floor(Math.random() * total) + 1;
+  const randomId = Math.floor(Math.random() * TOTAL_DEX) + 1;
   selectPokemonById(randomId);
 });
 
