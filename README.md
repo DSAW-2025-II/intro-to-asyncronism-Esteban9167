@@ -35,3 +35,24 @@
 | Calidad del código     | 1.5     |
 | Funcionalidad      | 1.5      |
 
+
+
+# Pokédex
+
+Aplicación web que consume la [PokeAPI](https://pokeapi.co/) y muestra información de Pokémon con interfaz interactiva.
+
+## 🚀 Deployments
+
+- **Vercel:** [pokedex-smoky-kappa.vercel.app](https://pokedex-smoky-kappa.vercel.app)  
+- **GitHub Pages:** [intro-to-asyncronism-Esteban9167](https://dsaw-2025-ii.github.io/intro-to-asyncronism-Esteban9167/)
+
+## 📂 Código fuente
+
+Repositorio en GitHub:  
+[DSAW-2025-II / intro-to-asyncronism-Esteban9167](https://github.com/DSAW-2025-II/intro-to-asyncronism-Esteban9167)
+
+## 👨‍💻 Autor
+
+- **Nombre:** Esteban Sequeda Henao  
+- **Código estudiantil:** 0000328378  
+- **Correo:** [estebansehe@unisabna.edu.con](mailto:estebansehe@unisabna.edu.con)
