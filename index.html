@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pokedex</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Fonts preload -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700;900&family=Poppins:ital,wght@0,400;0,600;0,700;1,400&family=Press+Start+2P&family=VT323&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- Sidebar (logo + actions) -->
+  <div class="main-bar">
+    <img src="/Img/pokedex_close.png" alt="Pokedex cerrada">
+
+    <!-- Search button -->
+    <button class="icon-btn" id="search-toggle" aria-label="Buscar">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="icon-search">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+      </svg>
+    </button>
+
+    <!-- Random button -->
+    <button class="icon-btn" id="random-btn" aria-label="Pokémon aleatorio">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+        stroke="currentColor" class="icon-random">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7
+             48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7
+             c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3
+             m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0
+             3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0
+             3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
+      </svg>
+    </button>
+
+    <img src="/Img/pokeball.png" alt="pokeball cerrada">
+  </div>
+
+  <!-- Search panel (hidden by default) -->
+  <div class="search-panel" id="search-panel" aria-hidden="true">
+    <form id="search-form" autocomplete="off">
+      <label for="search-input" class="search-label">Buscar Pokémon</label>
+      <input id="search-input" class="search-input" type="text"
+        placeholder="ID (1–1025) o nombre (ej: bulbasaur)" />
+      <div class="search-actions">
+        <button type="submit" class="btn p">Buscar</button>
+        <button type="button" id="search-clear" class="btn type-steel">Limpiar</button>
+        <button type="button" id="search-close" class="btn type-dark">Cerrar</button>
+      </div>
+      <p class="search-error" id="search-error" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <!-- Mid card: filters + grid -->
+  <div class="mid-card">
+    <div class="header">
+      <div class="head-main">
+        <p>pokedex</p>
+        <p class="poke-ja">ポケモン図鑑</p>
+      </div>
+
+      <div>
+        <ul class="nav">
+          <li class="nav-item"><button class="btn p" id="see-all">See All</button></li>
+          <li class="nav-item"><button class="btn type-normal" id="normal">Normal</button></li>
+          <li class="nav-item"><button class="btn type-fire" id="fire">Fire</button></li>
+          <li class="nav-item"><button class="btn type-water" id="water">Water</button></li>
+          <li class="nav-item"><button class="btn type-grass" id="grass">Grass</button></li>
+          <li class="nav-item"><button class="btn type-electric" id="electric">Electric</button></li>
+          <li class="nav-item"><button class="btn type-ice" id="ice">Ice</button></li>
+          <li class="nav-item"><button class="btn type-fighting" id="fighting">Fighting</button></li>
+          <li class="nav-item"><button class="btn type-poison" id="poison">Poison</button></li>
+          <li class="nav-item"><button class="btn type-ground" id="ground">Ground</button></li>
+          <li class="nav-item"><button class="btn type-flying" id="flying">Flying</button></li>
+          <li class="nav-item"><button class="btn type-psychic" id="psychic">Psychic</button></li>
+          <li class="nav-item"><button class="btn type-bug" id="bug">Bug</button></li>
+          <li class="nav-item"><button class="btn type-rock" id="rock">Rock</button></li>
+          <li class="nav-item"><button class="btn type-ghost" id="ghost">Ghost</button></li>
+          <li class="nav-item"><button class="btn type-dragon" id="dragon">Dragon</button></li>
+          <li class="nav-item"><button class="btn type-dark" id="dark">Dark</button></li>
+          <li class="nav-item"><button class="btn type-steel" id="steel">Steel</button></li>
+          <li class="nav-item"><button class="btn type-fairy" id="fairy">Fairy</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cards grid gets rendered here -->
+    <div class="cards" id="listPokemon"></div>
+  </div>
+
+  <!-- Main card: selected Pokémon detail -->
+  <div class="main-card">
+    <div class="number">
+      <button class="back" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+        </svg>
+      </button>
+      <p class="idPoke">1</p>
+      <button class="back" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+          stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+    </div>
+
+    <p class="pokemon-name">bulbasaur</p>
+
+    <div class="basic-pokemon">
+      <p class="region">Kanto</p>
+      <p class="pokemon-name-ja">フシギダネ</p>
+      <p class="pokemon-img">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+          alt="bulbasaur">
+      </p>
+    </div>
+
+    <div class="type">
+      <p class="type-img">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/12.png"
+          alt="grass">
+      </p>
+      <p class="type-img">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-ix/scarlet-violet/4.png"
+          alt="poison">
+      </p>
+    </div>
+
+    <div class="all-stats">
+      <div class="stats"><p>HP:</p></div>
+      <div class="stats"><p>Attack:</p></div>
+      <div class="stats"><p>Defense:</p></div>
+      <div class="stats"><p>Sp. Attack:</p></div>
+      <div class="stats"><p>Sp. Defense:</p></div>
+      <div class="stats"><p>Speed:</p></div>
+    </div>
+  </div>
+
+  <!-- JS: carga primero la configuración, luego tu lógica -->
+  <script src="./config.js"></script>
+  <script src="./main.js"></script>
+</body>
+</html>
